@@ -4,14 +4,55 @@ import re
 # skus = unicode string
 
 PRICE_TABLE = {
-    'A': {'price': 50},
-    'B': {'price': 30},
-    'C': {'price': 20},
-    'D': {'price': 15},
-    'E': {'price': 40},
-    'F': {'price': 10}
+    'A': 50,
+    'B': 30,
+    'C': 20,
+    'D': 15,
+    'E': 40,
+    'F': 10,
+    'G': 20,
+    'H': 10,
+    'I': 35,
+    'J': 60,
+    'K': 80,
+    'L': 90,
+    'M': 15,
+    'N': 40,
+    'O': 10,
+    'P': 50,
+    'Q': 30,
+    'R': 50,
+    'S': 30,
+    'T': 20,
+    'U': 40,
+    'V': 50,
+    'W': 20,
+    'X': 90,
+    'Y': 10,
+    'Z': 50,
 }
-
+"""
+| 'G': {'price': 20},    | 20    |                        |
+| 'H': {'price': 10},    | 10    | 5H for 45, 10H for 80  |
+| 'I': {'price': 35},    | 35    |                        |
+| 'J': {'price': 60},    | 60    |                        |
+| 'K': {'price': 80},    | 80    | 2K for 150             |
+| 'L': {'price': 90},    | 90    |                        |
+| 'M': {'price': 15},    | 15    |                        |
+| 'N': {'price': 40},    | 40    | 3N get one M free      |
+| 'O': {'price': 10},    | 10    |                        |
+| 'P': {'price': 50},    | 50    | 5P for 200             |
+| 'Q': {'price': 30},    | 30    | 3Q for 80              |
+| 'R': {'price': 50},    | 50    | 3R get one Q free      |
+| 'S': {'price': 30},    | 30    |                        |
+| 'T': {'price': 20},    | 20    |                        |
+| 'U': {'price': 40},    | 40    | 3U get one U free      |
+| 'V': {'price': 50},    | 50    | 2V for 90, 3V for 130  |
+| 'W': {'price': 20},    | 20    |                        |
+| 'X': {'price': 90},    | 90    |                        |
+| 'Y': {'price': 10},    | 10    |                        |
+| 'Z': {'price': 50},    | 50    |                        |
+"""
 DISCOUNT_TABLE = {
     'A': [(5, 200), (3, 130)],
     'B': [(2, 45)]
@@ -79,6 +120,7 @@ def is_valid_skus(skus):
     valid_skus = "".join(PRICE_TABLE.keys())
     sku_regex = re.compile('^[{0}]*$'.format(valid_skus))
     return bool(sku_regex.match(skus))
+
 
 
 
