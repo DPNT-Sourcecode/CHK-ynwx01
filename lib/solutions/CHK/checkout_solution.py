@@ -145,10 +145,8 @@ def mix_and_match(aggregated_skus):
     :return: The total price of mix and matched products.
     """
     for mix_and_match_group in MIX_AND_MATCH:
-        skus =
+        skus = mix_and_match_group['skus']
         # The SKUs need to be ordered from most expensive to cheapest to ensure we give the customer the best value.
-
-
-
-
-
+        ordered_skus = [(sku, PRICE_TABLE[sku]) for sku in skus]
+        quantity = mix_and_match_group['quantity']
+        price = mix_and_match_group['price']
