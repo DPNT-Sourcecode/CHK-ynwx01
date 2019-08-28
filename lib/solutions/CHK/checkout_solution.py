@@ -51,9 +51,10 @@ FREE_TABLE = {
     'U': (3 + 1, 'U'),
 }
 
-MIX_AND_MATCH = {
+MIX_AND_MATCH = [
+    {'skus': ['Z', 'Y', 'X', 'T', 'S'], 'quantity': 3, 'price': 45}
+]
 
-}
 
 def checkout(skus):
     """
@@ -143,7 +144,10 @@ def mix_and_match(aggregated_skus):
     :param aggregated_skus: A dictionary mapping the products with their quantity in the basket.
     :return: The total price of mix and matched products.
     """
-    
+    for mix_and_match_group in MIX_AND_MATCH:
+        skus =
+        # The SKUs need to be ordered from most expensive to cheapest to ensure we give the customer the best value.
+
 
 
 
