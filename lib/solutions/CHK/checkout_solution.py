@@ -170,6 +170,9 @@ def mix_and_match(aggregated_skus):
 
         price_mix_match += mix_and_matches * price
 
+    return price_mix_match
+
+
 
 
 
