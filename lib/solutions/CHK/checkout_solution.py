@@ -14,7 +14,7 @@ PRICE_TABLE = {
     'H': 10,
     'I': 35,
     'J': 60,
-    'K': 80,
+    'K': 70,
     'L': 90,
     'M': 15,
     'N': 40,
@@ -22,21 +22,21 @@ PRICE_TABLE = {
     'P': 50,
     'Q': 30,
     'R': 50,
-    'S': 30,
+    'S': 20,
     'T': 20,
     'U': 40,
     'V': 50,
     'W': 20,
-    'X': 90,
-    'Y': 10,
-    'Z': 50,
+    'X': 17,
+    'Y': 20,
+    'Z': 21,
 }
 
 DISCOUNT_TABLE = {
     'A': [(5, 200), (3, 130)],
     'B': [(2, 45)],
     'H': [(10, 80), (5, 45)],
-    'K': [(2, 150)],
+    'K': [(2, 120)],
     'P': [(5, 200)],
     'Q': [(3, 80)],
     'V': [(3, 130), (2, 90)]
@@ -45,10 +45,10 @@ DISCOUNT_TABLE = {
 FREE_TABLE = {
     'E': (2, 'B'),
     # 2 get one free for the same item is in terms of our algorithm equivalent to remove one every three.
-    'F': (3, 'F'),
+    'F': (2 + 1, 'F'),
     'N': (3, 'M'),
     'R': (3, 'Q'),
-    'U': (4, 'U'),
+    'U': (3 + 1, 'U'),
 }
 
 
@@ -107,4 +107,5 @@ def is_valid_skus(skus):
     valid_skus = "".join(PRICE_TABLE.keys())
     sku_regex = re.compile('^[{0}]*$'.format(valid_skus))
     return bool(sku_regex.match(skus))
+
 
