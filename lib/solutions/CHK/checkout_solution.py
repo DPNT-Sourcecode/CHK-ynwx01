@@ -161,27 +161,13 @@ def mix_and_match(aggregated_skus):
 
         # Now we can remove already mix and matched products
         i = 0
-        print("")
-        print(ordered_skus)
-        print(aggregated_skus)
-        print(quantity_items_to_remove)
         for n in range(quantity_items_to_remove, 0, -1):
             # We go decreasingly in the least to remove the most expensive items first
-            try:
-                print(ordered_skus[i])
-            except IndexError:
-                print(aggregated_skus)
-            while aggregated_skus.get(ordered_skus[i], 0):
-                aggregated_skus[ordered_skus[i]] -= 1
-            else:
+            while not aggregated_skus.get(ordered_skus[i], 0):
                 i += 1
+            if aggregated_skus.get(ordered_skus[i], 0):
+                aggregated_skus[ordered_skus[i]] -= 1
+        print(aggregated_skus)
         price_mix_match += mix_and_matches * price
 
     return price_mix_match
-
-
-
-
-
-
-
