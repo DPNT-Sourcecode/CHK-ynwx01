@@ -48,7 +48,7 @@ FREE_TABLE = {
     'F': (3, 'F'),
     'N': (3, 'M'),
     'R': (3, 'Q'),
-    'U': (3, 'U'),
+    'U': (4, 'U'),
 }
 
 
@@ -107,3 +107,4 @@ def is_valid_skus(skus):
     valid_skus = "".join(PRICE_TABLE.keys())
     sku_regex = re.compile('^[{0}]*$'.format(valid_skus))
     return bool(sku_regex.match(skus))
+
