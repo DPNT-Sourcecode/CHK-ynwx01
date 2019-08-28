@@ -8,7 +8,8 @@ PRICE_TABLE = {
     'B': {'price': 30},
     'C': {'price': 20},
     'D': {'price': 15},
-    'E': {'price': 40}
+    'E': {'price': 40},
+    'F': {'price': 10}
 }
 
 DISCOUNT_TABLE = {
@@ -78,5 +79,6 @@ def is_valid_skus(skus):
     valid_skus = "".join(PRICE_TABLE.keys())
     sku_regex = re.compile('^[{0}]*$'.format(valid_skus))
     return bool(sku_regex.match(skus))
+
 
 
