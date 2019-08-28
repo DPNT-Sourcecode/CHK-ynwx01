@@ -56,8 +56,7 @@ def checkout(skus):
                 offer_price = (already_processed // special_offer[0]) * special_offer[1]
                 already_processed = already_processed % special_offer[0]
             # Leftover products
-            rest_price = (already_processed % special_offer[0]) * PRICE_TABLE[sku]['price']
-
+            rest_price = already_processed * PRICE_TABLE[sku]['price']
             sku_price = offer_price + rest_price
         else:
             sku_price = quantity * PRICE_TABLE[sku]['price']
@@ -77,6 +76,7 @@ def is_valid_skus(skus):
     valid_skus = "".join(PRICE_TABLE.keys())
     sku_regex = re.compile('^[{0}]*$'.format(valid_skus))
     return bool(sku_regex.match(skus))
+
 
 
 
