@@ -159,8 +159,12 @@ def mix_and_match(aggregated_skus):
         sku_price_map = [(sku, PRICE_TABLE[sku]) for sku in skus]
         ordered_skus = [sku_map[0] for sku_map in sorted(sku_price_map, key=lambda tup: tup[1])]
 
-        
+        i = 0
+        # Now we can remove already mix and matched products
+        for n in range(quantity_items_to_remove, 0, -1):
+
 
         price_mix_match += mix_and_matches * price
+
 
 
