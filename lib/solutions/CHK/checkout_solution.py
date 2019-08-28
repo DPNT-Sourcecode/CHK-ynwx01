@@ -152,11 +152,15 @@ def mix_and_match(aggregated_skus):
         price = mix_and_match_group['price']
 
         # We calculate the number of items to remove
-        quantity_items_to_remove = sum(aggregated_skus.get(sku, 0) for sku in skus) // quantity
+        mix_and_matches = sum(aggregated_skus.get(sku, 0) for sku in skus) // quantity
+        quantity_items_to_remove = mix_and_matches * quantity
 
         # The SKUs need to be ordered from most expensive to cheapest to ensure we give the customer the best value.
         sku_price_map = [(sku, PRICE_TABLE[sku]) for sku in skus]
         ordered_skus = [sku_map[0] for sku_map in sorted(sku_price_map, key=lambda tup: tup[1])]
 
-        price_mix_match += quantity_items_to_remove * price
+        
+
+        price_mix_match += mix_and_matches * price
+
 
