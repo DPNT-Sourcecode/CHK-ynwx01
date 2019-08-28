@@ -9,4 +9,3 @@ def hello(friend_name):
     :return: Return a message saying hello to our friend
     """
     return "Hello, {0}!".format(friend_name)
-

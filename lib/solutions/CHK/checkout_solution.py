@@ -18,7 +18,8 @@ def checkout(skus):
     :return: The total price of the basket.
     """
     if not is_valid_skus(skus):
-        return 01
+        return -1
+
 
 def is_valid_skus(skus):
     """
@@ -27,10 +28,7 @@ def is_valid_skus(skus):
     :return: True is the SKUs are in a valid format, False otherwise.
     """
     if not isinstance(skus, str):
-        return -1
+        return False
     valid_skus = "".join(PRICE_TABLE.keys())
-    sku_regex = re.compile('^{0}$'.format())
-
-
-
-
+    sku_regex = re.compile('^[{0}]*$'.format(valid_skus))
+    return bool(sku_regex.match(skus))
