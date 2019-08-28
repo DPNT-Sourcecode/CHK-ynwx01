@@ -18,7 +18,8 @@ DISCOUNT_TABLE = {
 
 FREE_TABLE = {
     'E': (2, 'B'),
-    'F': (2, 'F'),
+    # 2 get one free for the same item is in terms of our algorithm equivalent to remove one every three.
+    'F': (3, 'F'),
 }
 
 
@@ -77,4 +78,5 @@ def is_valid_skus(skus):
     valid_skus = "".join(PRICE_TABLE.keys())
     sku_regex = re.compile('^[{0}]*$'.format(valid_skus))
     return bool(sku_regex.match(skus))
+
 
