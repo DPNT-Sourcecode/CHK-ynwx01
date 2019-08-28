@@ -42,7 +42,7 @@ def checkout(skus):
             sku_price = quantity * PRICE_TABLE[sku]['price']
         total_price += sku_price
 
-    return sku_price
+    return total_price
 
 
 def is_valid_skus(skus):
@@ -56,5 +56,6 @@ def is_valid_skus(skus):
     valid_skus = "".join(PRICE_TABLE.keys())
     sku_regex = re.compile('^[{0}]*$'.format(valid_skus))
     return bool(sku_regex.match(skus))
+
 
 
