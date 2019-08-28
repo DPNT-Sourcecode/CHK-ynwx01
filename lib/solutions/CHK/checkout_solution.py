@@ -51,6 +51,9 @@ FREE_TABLE = {
     'U': (3 + 1, 'U'),
 }
 
+MIX_AND_MATCH = {
+
+}
 
 def checkout(skus):
     """
@@ -68,11 +71,7 @@ def checkout(skus):
             aggregated_skus[sku] = 0
         aggregated_skus[sku] += 1
 
-    # Priority is for offers that give you free products, so we remove free products when applicable.
-    for sku, (quantity, free_product_sku) in FREE_TABLE.items():
-        if sku in aggregated_skus and free_product_sku in aggregated_skus:
-            new_quantity = max(0, aggregated_skus[free_product_sku] - (aggregated_skus[sku] // quantity))
-            aggregated_skus[free_product_sku] = new_quantity
+    remove_free_items(aggregated_skus
 
     # We then calculate the total price by applying the weekly special offer when possible
     total_price = 0
@@ -107,5 +106,14 @@ def is_valid_skus(skus):
     valid_skus = "".join(PRICE_TABLE.keys())
     sku_regex = re.compile('^[{0}]*$'.format(valid_skus))
     return bool(sku_regex.match(skus))
+
+
+def remove_free_items(aggregated_skus):
+    # Priority is for offers that give you free products, so we remove free products when applicable.
+    for sku, (quantity, free_product_sku) in FREE_TABLE.items():
+        if sku in aggregated_skus and free_product_sku in aggregated_skus:
+            new_quantity = max(0, aggregated_skus[free_product_sku] - (aggregated_skus[sku] // quantity))
+            aggregated_skus[free_product_sku] = new_quantity
+
 
 
