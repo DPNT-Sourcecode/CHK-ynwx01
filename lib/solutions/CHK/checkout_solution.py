@@ -74,10 +74,13 @@ def checkout(skus):
     # We remove free items from the list
     remove_free_items(aggregated_skus)
 
-    #
+    # We calculate mix and match separately
+    mix_and_match_price = mix_and_match(aggregated_skus)
 
     # We can now calculate the rest of the basket's price
-    total_price += calculate_basket_price(aggregated_skus)
+    rest_price = calculate_basket_price(aggregated_skus)
+
+    total_price = mix_and_match_price + rest_price
     return total_price
 
 
@@ -95,6 +98,11 @@ def is_valid_skus(skus):
 
 
 def remove_free_items(aggregated_skus):
+    """
+    Removes from the dictionary mapping products and quantity the free items.
+    :param aggregated_skus: A dictionary mapping the products with their quantity in the basket.
+    :return: Nothing.
+    """
     # Priority is for offers that give you free products, so we remove free products when applicable.
     for sku, (quantity, free_product_sku) in FREE_TABLE.items():
         if sku in aggregated_skus and free_product_sku in aggregated_skus:
@@ -127,6 +135,15 @@ def calculate_basket_price(aggregated_skus):
             sku_price = quantity * PRICE_TABLE[sku]
         total_price += sku_price
     return total_price
+
+
+def mix_and_match(aggregated_skus):
+    """
+    Calculate the values of mix and match prices and remove already calculated products.
+    :param aggregated_skus: A dictionary mapping the products with their quantity in the basket.
+    :return: The total price of mix and matched products.
+    """
+    
 
 
 
