@@ -8,5 +8,6 @@ def hello(friend_name):
     :param friend_name: Ignore for now
     :return: Return a message saying hello to the world
     """
-    return "Hello, World"
+    return "Hello, World!"
+
 
