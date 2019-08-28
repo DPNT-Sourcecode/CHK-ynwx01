@@ -9,5 +9,3 @@ def hello(friend_name):
     :return: Return a message saying hello to the world
     """
     return "Hello, World!"
-
-
