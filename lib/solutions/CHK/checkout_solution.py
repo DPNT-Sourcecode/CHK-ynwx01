@@ -32,7 +32,18 @@ def checkout(skus):
     for sku, quantity in aggregated_skus.items():
         special_offer = PRICE_TABLE[sku].get('special', None)
         if special_offer:
-            sku_price = (quantity // special_offer[0]) * special_offer[1]
+            # Products that fit the discount
+            offer_price = (quantity // special_offer[0]) * special_offer[1]
+            # Leftover products
+            rest_price = (quantity % special_offer[0]) * PRICE_TABLE[sku]['price']
+
+            sku_price = offer_price + rest_price
+        else:
+            sku_price = quantity * PRICE_TABLE[sku]['price']
+        total_price += sku_price
+
+    return sku_price
+
 
 def is_valid_skus(skus):
     """
@@ -45,4 +56,5 @@ def is_valid_skus(skus):
     valid_skus = "".join(PRICE_TABLE.keys())
     sku_regex = re.compile('^[{0}]*$'.format(valid_skus))
     return bool(sku_regex.match(skus))
+
 
