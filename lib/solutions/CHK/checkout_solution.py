@@ -20,6 +20,19 @@ def checkout(skus):
     if not is_valid_skus(skus):
         return -1
 
+    # We start by counting the number of instance of each skus
+    aggregated_skus = {}
+    for sku in skus:
+        if sku not in aggregated_skus:
+            aggregated_skus[sku] = 0
+        aggregated_skus[sku] += 1
+
+    # We then calculate the total price by applying the weekly special offer when possible
+    total_price = 0
+    for sku, quantity in aggregated_skus.items():
+        special_offer = PRICE_TABLE[sku].get('special', None)
+        if special_offer:
+            sku_price = (quantity // special_offer[0]) * special_offer[1]
 
 def is_valid_skus(skus):
     """
@@ -32,3 +45,4 @@ def is_valid_skus(skus):
     valid_skus = "".join(PRICE_TABLE.keys())
     sku_regex = re.compile('^[{0}]*$'.format(valid_skus))
     return bool(sku_regex.match(skus))
+
