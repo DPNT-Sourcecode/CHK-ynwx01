@@ -28,6 +28,7 @@ class TestCheckout(object):
         assert checkout_solution.checkout('FFECFBFEBFBEF') == 225
 
     def test_valid_skus(self):
-        assert checkout_solution.checkout('ABBBGBBBCCC') == -1
+        assert checkout_solution.checkout('ABBBxBCCC') == -1
         assert checkout_solution.checkout('A0B') == -1
         assert checkout_solution.checkout(0) == -1
+
