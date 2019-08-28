@@ -27,7 +27,14 @@ class TestCheckout(object):
         assert checkout_solution.checkout('FECFBFEBFBEF') == 225
         assert checkout_solution.checkout('FFECFBFEBFBEF') == 225
 
+        # Test mix and match
+        assert checkout_solution.checkout('STXYZ') == 82
+        assert checkout_solution.checkout('SXXXTXYZ') == 124
+        assert checkout_solution.checkout('ZZZTX') == 82
+        assert checkout_solution.checkout('ZZZTXX') == 90
+
     def test_valid_skus(self):
         assert checkout_solution.checkout('ABBBxBCCC') == -1
         assert checkout_solution.checkout('A0B') == -1
         assert checkout_solution.checkout(0) == -1
+
