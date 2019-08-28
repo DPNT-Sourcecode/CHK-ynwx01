@@ -56,6 +56,3 @@ def is_valid_skus(skus):
     valid_skus = "".join(PRICE_TABLE.keys())
     sku_regex = re.compile('^[{0}]*$'.format(valid_skus))
     return bool(sku_regex.match(skus))
-
-
-

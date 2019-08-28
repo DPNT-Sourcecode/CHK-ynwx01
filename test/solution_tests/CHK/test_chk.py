@@ -11,5 +11,3 @@ class TestCheckout(object):
         assert checkout_solution.checkout('ABBBEBBBCCC') == -1
         assert checkout_solution.checkout('A0B') == -1
         assert checkout_solution.checkout(0) == -1
-
-
