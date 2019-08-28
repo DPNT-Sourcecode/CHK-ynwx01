@@ -71,8 +71,43 @@ def checkout(skus):
             aggregated_skus[sku] = 0
         aggregated_skus[sku] += 1
 
-    remove_free_items(aggregated_skus
+    # We remove free items from the list
+    remove_free_items(aggregated_skus)
 
+    #
+
+    # We can now calculate the rest of the basket's price
+    total_price += calculate_basket_price(aggregated_skus)
+    return total_price
+
+
+def is_valid_skus(skus):
+    """
+    Checks whether the list of SKUs received is valid.
+    :param skus: A string containing the SKUs in the basket.
+    :return: True is the SKUs are in a valid format, False otherwise.
+    """
+    if not isinstance(skus, str):
+        return False
+    valid_skus = "".join(PRICE_TABLE.keys())
+    sku_regex = re.compile('^[{0}]*$'.format(valid_skus))
+    return bool(sku_regex.match(skus))
+
+
+def remove_free_items(aggregated_skus):
+    # Priority is for offers that give you free products, so we remove free products when applicable.
+    for sku, (quantity, free_product_sku) in FREE_TABLE.items():
+        if sku in aggregated_skus and free_product_sku in aggregated_skus:
+            new_quantity = max(0, aggregated_skus[free_product_sku] - (aggregated_skus[sku] // quantity))
+            aggregated_skus[free_product_sku] = new_quantity
+
+
+def calculate_basket_price(aggregated_skus):
+    """
+    Given the mapping of the products and their quantity, calculate the total value of the basket.
+    :param aggregated_skus: A dictionary mapping the products with their quantity in the basket.
+    :return: The total price of the basket.
+    """
     # We then calculate the total price by applying the weekly special offer when possible
     total_price = 0
     for sku, quantity in aggregated_skus.items():
@@ -91,29 +126,8 @@ def checkout(skus):
         else:
             sku_price = quantity * PRICE_TABLE[sku]
         total_price += sku_price
-
     return total_price
 
-
-def is_valid_skus(skus):
-    """
-    Checks whether the list of SKUs received is valid.
-    :param skus: A string containing the SKUs in the basket
-    :return: True is the SKUs are in a valid format, False otherwise.
-    """
-    if not isinstance(skus, str):
-        return False
-    valid_skus = "".join(PRICE_TABLE.keys())
-    sku_regex = re.compile('^[{0}]*$'.format(valid_skus))
-    return bool(sku_regex.match(skus))
-
-
-def remove_free_items(aggregated_skus):
-    # Priority is for offers that give you free products, so we remove free products when applicable.
-    for sku, (quantity, free_product_sku) in FREE_TABLE.items():
-        if sku in aggregated_skus and free_product_sku in aggregated_skus:
-            new_quantity = max(0, aggregated_skus[free_product_sku] - (aggregated_skus[sku] // quantity))
-            aggregated_skus[free_product_sku] = new_quantity
 
 
 
