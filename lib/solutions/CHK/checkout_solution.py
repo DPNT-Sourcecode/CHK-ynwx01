@@ -17,7 +17,8 @@ DISCOUNT_TABLE = {
 }
 
 FREE_TABLE = {
-    'E': (2, 'B')
+    'E': (2, 'B'),
+    'F': (2, 'F'),
 }
 
 
@@ -76,3 +77,4 @@ def is_valid_skus(skus):
     valid_skus = "".join(PRICE_TABLE.keys())
     sku_regex = re.compile('^[{0}]*$'.format(valid_skus))
     return bool(sku_regex.match(skus))
+
