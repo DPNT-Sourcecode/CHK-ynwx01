@@ -4,10 +4,20 @@ import re
 # skus = unicode string
 
 PRICE_TABLE = {
-    'A': {'price': 50, 'special': (3, 130)},
-    'B': {'price': 30, 'special': (2, 45)},
+    'A': {'price': 50},
+    'B': {'price': 30},
     'C': {'price': 20},
-    'D': {'price': 15}
+    'D': {'price': 15},
+    'E': {'price': 40}
+}
+
+DISCOUNT_TABLE = {
+    'A': [(5, 200), (3, 130)],
+    'B': [(2, 45)]
+}
+
+FREE_TABLE = {
+    'E': (2, 'B')
 }
 
 
@@ -56,3 +66,4 @@ def is_valid_skus(skus):
     valid_skus = "".join(PRICE_TABLE.keys())
     sku_regex = re.compile('^[{0}]*$'.format(valid_skus))
     return bool(sku_regex.match(skus))
+
